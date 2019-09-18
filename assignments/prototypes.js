@@ -35,6 +35,8 @@ function CharacterStats(stats){
 
 }//end of CharStats constructor
 
+CharacterStats.prototype = Object.create(GameObject.prototype);
+
 CharacterStats.prototype.takeDamage = function(){
   return `${this.name} took damage.`;
 };//1:1 CharacterStats prototype Fns
@@ -42,14 +44,21 @@ CharacterStats.prototype.takeDamage = function(){
 
 function Humanoid(traits){
   CharacterStats.call(this, traits);
+  
   this.team = traits.team;
   this.weapons = traits.weapons;
   this.language = traits.language;
 } // end of humanoid constructor
 
+
+Humanoid.prototype = Object.create(CharacterStats.prototype);
+
+
 Humanoid.prototype.greet = function(){
   return `${this.name} offers a greeting in ${this.language}.`
 }
+
+
 /*
   === CharacterStats ===
   * healthPoints
