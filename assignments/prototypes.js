@@ -58,6 +58,20 @@ Humanoid.prototype.greet = function(){
   return `${this.name} offers a greeting in ${this.language}.`
 }
 
+function Hero(virtues){
+  Humanoid.call(this, virtues);
+
+}//end of hero constructor
+
+Hero.prototype = Object.create(Humanoid.prototype);
+
+function Villian(vices){
+  Humanoid.call(this, vices);
+
+}
+
+Villian.prototype = Object.create(Humanoid.prototype);
+
 
 /*
   === CharacterStats ===
