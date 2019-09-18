@@ -19,6 +19,14 @@
 
 // Principle 1
 
+function atGlbl(){
+    console.log(this.world)
+};
+
+const world = "won't be this";
+
+atGlbl(); //browser seems to be defaulting "use strict" because undefined is coming back instead of window
+
 // code example for Window Binding
 
 // Principle 2
