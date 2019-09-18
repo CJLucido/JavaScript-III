@@ -48,7 +48,7 @@ function Humanoid(traits){
 } // end of humanoid constructor
 
 Humanoid.prototype.greet = function(){
-  returns `${this.name} offers a greeting in ${this.language}.`
+  return `${this.name} offers a greeting in ${this.language}.`
 }
 /*
   === CharacterStats ===
