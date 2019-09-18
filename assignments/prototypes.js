@@ -16,12 +16,75 @@
   * destroy() // prototype method that returns: `${this.name} was removed from the game.`
 */
 
+function GameObject(props){
+  this.createdAt= props.createdAt;
+  this.name= props.name;
+  this.dimensions = props.dimensions;
+
+  GameObject.prototype.destroy = function(){
+    return `${this.name} was removed from the game.`;
+  };
+
+
+
+}; //end of GameObject constructor
+
+function CharacterStats(stats){
+  GameObject.call(this, stats);//inherits from the higher constructor
+  this.healthPoints = stats.healthPoints;
+
+}//end of CharStats constructor
+
+CharacterStats.prototype = Object.create(GameObject.prototype); //inherits/creates from the higher prototype
+
+CharacterStats.prototype.takeDamage = function(){
+  return `${this.name} took damage.`;
+};//1:1 CharacterStats prototype Fns
+
+
+function Humanoid(traits){
+  CharacterStats.call(this, traits);
+  
+  this.team = traits.team;
+  this.weapons = traits.weapons;
+  this.language = traits.language;
+} // end of humanoid constructor
+
+
+Humanoid.prototype = Object.create(CharacterStats.prototype);
+
+
+Humanoid.prototype.greet = function(){
+  return `${this.name} offers a greeting in ${this.language}.`
+}
+
+function Hero(virtues){
+  Humanoid.call(this, virtues);
+  this.divineMight = function(){
+      return `${this.name} is immune to plights, makes it rain fire and radioactive light on opponent, destroying all villains`
+  };
+}//end of hero constructor
+
+Hero.prototype = Object.create(Humanoid.prototype);
+
+function Villain(vices){
+  Humanoid.call(this, vices);
+  this.unrulyPlight = function(){
+    return `A spell spoken in ${this.language} unleashes airbourne flesh eating bacteria, all but heros are taken to near death.`
+  };
+}
+
+Villain.prototype = Object.create(Humanoid.prototype);
+
+
 /*
   === CharacterStats ===
   * healthPoints
   * takeDamage() // prototype method -> returns the string '<object name> took damage.'
   * should inherit destroy() from GameObject's prototype
 */
+
+
 
 /*
   === Humanoid (Having an appearance or character resembling that of a human.) ===
@@ -41,7 +104,7 @@
 
 // Test you work by un-commenting these 3 objects and the list of console logs below:
 
-/*
+
   const mage = new Humanoid({
     createdAt: new Date(),
     dimensions: {
@@ -92,6 +155,41 @@
     language: 'Elvish',
   });
 
+  const paladin = new Hero({
+    createdAt: new Date(),
+    dimensions: {
+      length: 7,
+      width: 7,
+      height: 7,
+    },
+    healthPoints: 1000,
+    name: 'Saint',
+    team: 'Higher Realms',
+    weapons: [
+      'Incapatability of presence',
+      'Sword',
+    ],
+    language: 'Unknown- Alpha Hz',
+  });
+
+  const demon = new Villain({
+    createdAt: new Date(),
+    dimensions: {
+      length: 6,
+      width: 6,
+      height: 6,
+    },
+    healthPoints: 1,
+    name: 'Materiel',
+    team: 'Denser realms',
+    weapons: [
+      'Your vices',
+      'Guilt',
+      'Fear',
+    ],
+    language: 'Low Frequency',
+  });
+
   console.log(mage.createdAt); // Today's date
   console.log(archer.dimensions); // { length: 1, width: 2, height: 4 }
   console.log(swordsman.healthPoints); // 15
@@ -102,7 +200,9 @@
   console.log(archer.greet()); // Lilith offers a greeting in Elvish.
   console.log(mage.takeDamage()); // Bruce took damage.
   console.log(swordsman.destroy()); // Sir Mustachio was removed from the game.
-*/
+  console.log(demon.unrulyPlight());
+  console.log(paladin.divineMight());
+  console.log(demon.destroy());
 
   // Stretch task: 
   // * Create Villain and Hero constructor functions that inherit from the Humanoid constructor function.  
