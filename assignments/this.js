@@ -8,9 +8,11 @@
 
 * 1. Window binding is the principle that if a declared function or function expression was defined/assigned within the global scope and 'this was used in their definitions, then 'this' refers to the window (the actual JS language) or in node it points to the global object.
 
-* 2. 
-* 3. 
-* 4. 
+* 2. Implicit Binding is the principle that if this is used in an object or objects method, than it points to that object itself. So 'this' will reference a property/key value pair within the object.
+
+* 3. New binding is the principle that when a constructor function is made using 'this' on the source objects key value pairs, then when a new object is created using that constructor function, 'this' will refer to that new object and not the source object or the constructor function.
+
+* 4. Explicit binding is the principle that, even if object properties are defined, an object's properties can be redefined/assigned to another object's properties using the .call or .apply methods. We can aslo use it to redefine/assign properties for a function using .bind. In other words, we can tell 'this' what it means. 
 *
 * write out a code example of each explanation above
 */
