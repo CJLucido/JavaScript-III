@@ -25,31 +25,31 @@ function GameObject(props){
     return `${this.name} was removed from the game.`;
   };
 
-  function CharacterStats(stats){
-    this.healthPoints = stats.healthPoints;
-    this.destroy();//WILL THIS WORK???//////////////////////////////////////
 
-
-    function Humanoid(traits){
-      this.destroy();
-      this.takeDamage();
-      this.team = traits.team;
-      this.weapons = traits.weapons;
-      this.language = traits.language;
-    } // end of humanoid constructor
-
-    Humanoid.prototype.greet = function(){
-      returns `${this.name} offers a greeting in ${this.language}.`
-    }
-
-  }//end of CharStats constructor
-  
-  CharacterStats.prototype.takeDamage = function(){
-    return `${this.name} took damage.`;
-  };//1:1 CharacterStats prototype Fns
 
 }; //end of GameObject constructor
 
+function CharacterStats(stats){
+  GameObject.call(this, stats);
+  this.healthPoints = stats.healthPoints;
+
+}//end of CharStats constructor
+
+CharacterStats.prototype.takeDamage = function(){
+  return `${this.name} took damage.`;
+};//1:1 CharacterStats prototype Fns
+
+
+function Humanoid(traits){
+  CharacterStats.call(this, traits);
+  this.team = traits.team;
+  this.weapons = traits.weapons;
+  this.language = traits.language;
+} // end of humanoid constructor
+
+Humanoid.prototype.greet = function(){
+  returns `${this.name} offers a greeting in ${this.language}.`
+}
 /*
   === CharacterStats ===
   * healthPoints
@@ -77,7 +77,7 @@ function GameObject(props){
 
 // Test you work by un-commenting these 3 objects and the list of console logs below:
 
-/*
+
   const mage = new Humanoid({
     createdAt: new Date(),
     dimensions: {
@@ -138,7 +138,7 @@ function GameObject(props){
   console.log(archer.greet()); // Lilith offers a greeting in Elvish.
   console.log(mage.takeDamage()); // Bruce took damage.
   console.log(swordsman.destroy()); // Sir Mustachio was removed from the game.
-*/
+
 
   // Stretch task: 
   // * Create Villain and Hero constructor functions that inherit from the Humanoid constructor function.  
