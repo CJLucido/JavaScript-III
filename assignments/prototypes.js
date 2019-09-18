@@ -30,12 +30,12 @@ function GameObject(props){
 }; //end of GameObject constructor
 
 function CharacterStats(stats){
-  GameObject.call(this, stats);
+  GameObject.call(this, stats);//inherits from the higher constructor
   this.healthPoints = stats.healthPoints;
 
 }//end of CharStats constructor
 
-CharacterStats.prototype = Object.create(GameObject.prototype);
+CharacterStats.prototype = Object.create(GameObject.prototype); //inherits/creates from the higher prototype
 
 CharacterStats.prototype.takeDamage = function(){
   return `${this.name} took damage.`;
@@ -60,17 +60,21 @@ Humanoid.prototype.greet = function(){
 
 function Hero(virtues){
   Humanoid.call(this, virtues);
-
+  this.divineMight = function(){
+      return `${this.name} is immune to plights, makes it rain fire and radioactive light on opponent, destroying all villains`
+  };
 }//end of hero constructor
 
 Hero.prototype = Object.create(Humanoid.prototype);
 
-function Villian(vices){
+function Villain(vices){
   Humanoid.call(this, vices);
-
+  this.unrulyPlight = function(){
+    return `A spell spoken in ${this.language} unleashes airbourne flesh eating bacteria, all but heros are taken to near death.`
+  };
 }
 
-Villian.prototype = Object.create(Humanoid.prototype);
+Villain.prototype = Object.create(Humanoid.prototype);
 
 
 /*
@@ -151,6 +155,41 @@ Villian.prototype = Object.create(Humanoid.prototype);
     language: 'Elvish',
   });
 
+  const paladin = new Hero({
+    createdAt: new Date(),
+    dimensions: {
+      length: 7,
+      width: 7,
+      height: 7,
+    },
+    healthPoints: 1000,
+    name: 'Saint',
+    team: 'Higher Realms',
+    weapons: [
+      'Incapatability of presence',
+      'Sword',
+    ],
+    language: 'Unknown- Alpha Hz',
+  });
+
+  const demon = new Villain({
+    createdAt: new Date(),
+    dimensions: {
+      length: 6,
+      width: 6,
+      height: 6,
+    },
+    healthPoints: 1,
+    name: 'Materiel',
+    team: 'Denser realms',
+    weapons: [
+      'Your vices',
+      'Guilt',
+      'Fear',
+    ],
+    language: 'Low Frequency',
+  });
+
   console.log(mage.createdAt); // Today's date
   console.log(archer.dimensions); // { length: 1, width: 2, height: 4 }
   console.log(swordsman.healthPoints); // 15
@@ -161,7 +200,9 @@ Villian.prototype = Object.create(Humanoid.prototype);
   console.log(archer.greet()); // Lilith offers a greeting in Elvish.
   console.log(mage.takeDamage()); // Bruce took damage.
   console.log(swordsman.destroy()); // Sir Mustachio was removed from the game.
-
+  console.log(demon.unrulyPlight());
+  console.log(paladin.divineMight());
+  console.log(demon.destroy());
 
   // Stretch task: 
   // * Create Villain and Hero constructor functions that inherit from the Humanoid constructor function.  
