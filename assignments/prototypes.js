@@ -27,7 +27,21 @@ function GameObject(props){
 
   function CharacterStats(stats){
     this.healthPoints = stats.healthPoints;
-    this.destroy();//WILL THIS WORK???
+    this.destroy();//WILL THIS WORK???//////////////////////////////////////
+
+
+    function Humanoid(traits){
+      this.destroy();
+      this.takeDamage();
+      this.team = traits.team;
+      this.weapons = traits.weapons;
+      this.language = traits.language;
+    } // end of humanoid constructor
+
+    Humanoid.prototype.greet = function(){
+      returns `${this.name} offers a greeting in ${this.language}.`
+    }
+
   }//end of CharStats constructor
   
   CharacterStats.prototype.takeDamage = function(){
