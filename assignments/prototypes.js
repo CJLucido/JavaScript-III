@@ -20,13 +20,14 @@ function GameObject(props){
   this.createdAt= props.createdAt;
   this.name= props.name;
   this.dimensions = props.dimensions;
-  this.destroy = function(){
+
+  GameObject.prototype.destroy = function(){
     return `${this.name} was removed from the game.`;
   };
 
-
   function CharacterStats(stats){
     this.healthPoints = stats.healthPoints;
+    this.destroy();//WILL THIS WORK???
   }//end of CharStats constructor
   
   CharacterStats.prototype.takeDamage = function(){
